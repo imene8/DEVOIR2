@@ -1,4 +1,6 @@
-# Devoir 02 — Angular : Ajout, Modification et Suppression des Produits
+# DEVOIR2
+
+**Angular : Ajout, Modification et Suppression des Produits**
 
 Application de gestion de produits réalisée en Angular, couvrant les **sections 9 et 10** de
 l'atelier. Le code de ces deux sections est intégralement présent dans ce dépôt ; les sections
