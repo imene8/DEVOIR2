@@ -14,6 +14,10 @@ const cible = path.join(__dirname, '..', 'docs', 'Devoir_02_Nadhem_BEL_HADJ.docx
   const media = noms.filter((n) => n.startsWith('word/media/'));
   const texte = xml.replace(/<[^>]+>/g, ' ');
 
+  const nbImages = (xml.match(/<w:drawing>/g) || []).length;
+  const nbGabarits = (xml.match(/CAPTURE D/g) || []).length;
+  const figures = (texte.match(/Figure \d+\.\d+/g) || []).length;
+
   const controles = [
     ['[Content_Types].xml', noms.includes('[Content_Types].xml')],
     ['word/document.xml', noms.includes('word/document.xml')],
@@ -22,10 +26,10 @@ const cible = path.join(__dirname, '..', 'docs', 'Devoir_02_Nadhem_BEL_HADJ.docx
     ['word/footer1.xml', noms.includes('word/footer1.xml')],
     ['champ TOC', xml.includes('TOC \\h \\o')],
     ['sauts de page', (xml.match(/w:type="page"/g) || []).length >= 3],
-    ['images incorporées', media.length > 0],
-    ['blocs image', (xml.match(/<w:drawing>/g) || []).length],
-    ['gabarits restants', (xml.match(/CAPTURE D/g) || []).length],
-    ['tableaux', (xml.match(/<w:tbl>/g) || []).length],
+    ['11 images placées', nbImages === 11, nbImages],
+    ['aucun gabarit vide', nbGabarits === 0, nbGabarits],
+    ['11 légendes', figures === 11, figures],
+    ['tableaux', (xml.match(/<w:tbl>/g) || []).length > 0, (xml.match(/<w:tbl>/g) || []).length],
     ['section 9', texte.includes('Section 9')],
     ['section 10', texte.includes('Section 10')],
     ['ActivatedRoute', texte.includes('ActivatedRoute')],
@@ -33,8 +37,10 @@ const cible = path.join(__dirname, '..', 'docs', 'Devoir_02_Nadhem_BEL_HADJ.docx
     ['pied de page', (await zip.file('word/footer1.xml').async('string')).includes('PAGE')],
   ];
 
-  for (const [libelle, ok] of controles) {
-    console.log(`${ok ? 'OK   ' : 'ECHEC'} ${libelle.padEnd(22)} ${typeof ok === 'number' ? ok : ''}`);
+  let echecs = 0;
+  for (const [libelle, ok, detail] of controles) {
+    if (!ok) echecs += 1;
+    console.log(`${ok ? 'OK   ' : 'ECHEC'} ${libelle.padEnd(22)} ${detail ?? ''}`);
   }
   console.log(`\nfichiers média : ${media.length}`);
   for (const m of media) console.log('  ' + m);

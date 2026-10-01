@@ -331,7 +331,8 @@ for (let i = 0; i < lignes.length; i++) {
   }
 
   if (l.startsWith('::figure')) {
-    const [, source] = l.split(/\s+/, 2);
+    // Le chemin peut contenir des espaces : on ne découpe pas sur les blancs.
+    const source = l.slice('::figure'.length).trim() || null;
     const legende = [];
     let j = i + 1;
     while (j < lignes.length && lignes[j].trim() !== '') {

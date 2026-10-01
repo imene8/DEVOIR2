@@ -30,10 +30,6 @@ routeur d'Angular.
 | Éditeur | Visual Studio Code |
 | Node.js | v24.15.0 |
 
-::figure
-**Figure 0.1** — Arborescence du projet `atelier-produits` dans Visual Studio Code.
-Capturer l'arborescence `src/app` (models, services, components) et l'onglet `TERMINAL`.
-
 ### L'arborescence du projet
 
 ```
@@ -66,10 +62,9 @@ atelier-produits/
 ```
 
 ::figure captures/fig-00-2-liste-des-produits.png
-
-**Figure 0.2** — Page d'accueil de l'application (liste des produits) au lancement.
-La barre de navigation, le tableau des produits et le bouton « + Ajouter un produit » doivent
-être visibles.
+**Figure 0.1** — Page d'accueil de l'application (liste des produits) au lancement.
+La barre de navigation, le tableau des produits et le bouton « + Ajouter un produit » sont
+visibles.
 
 ---
 
@@ -100,10 +95,6 @@ partie « Interface VS Classe » (vidéo à **26:41**).
 Sans cette séparation, toute la logique se retrouverait dans le composant : la liste, la
 validation et le stockage donneraient un fichier de plusieurs centaines de lignes impossible à
 maintenir.
-
-::figure
-**Figure 9.1** — Schéma de l'atelier : Modèle ↔ Service ↔ Composants.
-Un schéma simple en trois blocs suffit.
 
 ## 9.2 Création de la classe Modèle Produit
 
@@ -170,10 +161,6 @@ Le mot-clé `readonly` sur un tableau empêche d'ajouter ou de retirer un élém
 Pour obtenir une copie modifiable, on utilise `[...PRODUITS_INITIAUX]`. Cette précaution évite
 qu'un service modifie par mégarde le jeu de données de référence.
 
-::figure
-**Figure 9.2** — Création du fichier `produit.ts` dans VS Code et déclaration de l'interface.
-Capturer le panneau Explorateur (dossier `models`) avec le fichier `produit.ts` ouvert.
-
 ## 9.3 Options de l'instruction `@for`
 
 *(Vidéo à 11:03)*
@@ -235,11 +222,6 @@ Dans le corps du `@for`, Angular met à disposition :
 - la variable déclarée (`produit`) ;
 - `$index`, `$first`, `$last`, `$even`, `$odd`, `$count` ;
 - `$any` pour contourner le typage strict lorsqu'un attribut DOM attend une chaîne.
-
-::figure
-**Figure 9.3** — Test de `track $index` puis de `track produit.id`.
-Deux captures : (a) suppression d'une ligne avec `track $index`, (b) suppression d'une ligne
-avec `track produit.id`.
 
 ## 9.4 Création d'un formulaire pour ajouter un nouveau produit
 
@@ -320,14 +302,12 @@ visité : d'où la double condition `touched || formSubmitted()`.
 (`required`, `minlength`, `min`) en un message lisible.
 
 ::figure captures/fig-9-4-formulaire-ajout-vide.png
-
-**Figure 9.4** — Page « Ajouter un produit » avec le formulaire vide.
-Le champ `description` est déjà rempli pour illustrer le textarea.
+**Figure 9.1** — Page « Ajouter un produit » : le formulaire d'ajout, ses champs et les
+validateurs associés.
 
 ::figure captures/fig-9-5-formulaire-erreurs.png
-
-**Figure 9.5** — Soumission d'un formulaire incomplet : les champs obligatoires sont
-surlignés en rouge et les messages d'erreur apparaissent.
+**Figure 9.2** — Soumission d'un formulaire incomplet : les champs obligatoires sont
+surlignés en rouge et les messages d'erreur apparaissent sous chacun d'eux.
 
 ## 9.5 Création du Service produit
 
@@ -411,10 +391,6 @@ Points à noter :
 appelée **au moment de la construction** du service (`signal<Produit[]>(this.charger())`), ce qui
 signifie que la collection initiale est déjà restaurée au premier accès au service.
 
-::figure
-**Figure 9.6** — `ProductService` dans VS Code, avec les méthodes `ajouter`, `modifier`,
-`supprimer`, `reinitialiser`.
-
 ## 9.6 Interface VS Classe
 
 *(Vidéo à 26:41)*
@@ -440,10 +416,6 @@ identiques — les deux sont purement structurels. La différence pratique tient
 qu'une interface peut être **étendue** (`extends`) et peut servir de contrat pour une classe
 (`implements`), ce que `type` ne peut pas faire.
 
-::figure
-**Figure 9.7** — Comparaison dans VS Code : déclaration `interface` puis déclaration `class`
-équivalente, côte à côte.
-
 ## 9.7 Récapitulatif de la section 9
 
 | Étape | Fichier produit | Résultat |
@@ -454,9 +426,8 @@ qu'une interface peut être **étendue** (`extends`) et peut servir de contrat p
 | Service | `src/app/services/product.service.ts` | Signal + CRUD + persistance `localStorage`. |
 
 ::figure captures/fig-9-8-apres-ajout.png
-
-**Figure 9.8** — Produit « Lattes » ajouté depuis le formulaire : il apparaît dans le tableau,
-le compteur passe à 5 et la valeur du stock est recalculée.
+**Figure 9.3** — Produit « Lattes » ajouté depuis le formulaire : il apparaît en dernière ligne du
+tableau, le compteur passe à 5 produit(s) et la valeur du stock est recalculée.
 
 ---
 
@@ -518,12 +489,8 @@ perte de données par un clic accidentel. Le service, lui, ne demande jamais : i
 dialogue pas avec l'utilisateur.
 
 ::figure captures/fig-00-2-liste-des-produits.png
-
-**Figure 10.1** — Le tableau avec la colonne « Actions » contenant les liens « Modifier » et
-« Supprimer ».
-
-::figure
-**Figure 10.2** — La boîte de confirmation native du navigateur après un clic sur « Supprimer ».
+**Figure 10.1** — La colonne « Actions » du tableau : le lien « Modifier » (navigation) et le
+lien « Supprimer » (action) côte à côte.
 
 ## 10.3 Ajouter un formulaire pour modifier un produit
 
@@ -607,12 +574,8 @@ Le `map` parcourt toute la liste : la ligne non ciblée est renvoyée **inchang�
 (`if (p.id !== id) return p;`), ce qui évite de reconstruire les autres lignes.
 
 ::figure captures/fig-10-3-formulaire-modification.png
-
-**Figure 10.3** — Le formulaire de modification rempli avec les données du produit sélectionné.
-
-::figure captures/fig-10-7-confirmation-modification.png
-
-**Figure 10.4** — Après validation : le tableau affiche la nouvelle valeur du produit modifié.
+**Figure 10.2** — Le formulaire de modification, alimenté par `patchValue()` avec les données du
+produit sélectionné. La case « Afficher le champ Id Produit » est décochée.
 
 ## 10.4 Transmettre des paramètres avec `ActivatedRoute`
 
@@ -684,12 +647,9 @@ paramètre en donnée fiable avant tout accès au tableau des produits.
 Si l'identifiant n'existe pas (par exemple `/produits/modifier/999`, ou après la suppression du
 produit), le composant affiche un état « Produit introuvable » au lieu d'un formulaire vide.
 
-::figure
-**Figure 10.5** — La barre d'adresse affichant `localhost:4200/produits/modifier/3`.
-
 ::figure captures/fig-10-6-produit-introuvable.png
-
-**Figure 10.6** — La page « Produit introuvable » sur l'URL `/produits/modifier/999`.
+**Figure 10.3** — L'URL `/produits/modifier/999` ne correspond à aucun produit : le composant
+affiche « Produit introuvable » au lieu d'un formulaire vide.
 
 ## 10.5 Naviguer entre les pages avec `Router`
 
@@ -775,13 +735,27 @@ La confirmation s'affiche alors en haut du tableau :
 ```
 
 ::figure captures/fig-10-7-confirmation-modification.png
+**Figure 10.4** — Retour sur `/produits?modifie=...` : le tableau affiche la valeur modifiée et
+le message de confirmation est présenté au-dessus, avec son lien « Fermer ».
 
-**Figure 10.7** — La barre d'adresse après la modification : `localhost:4200/produits?modifie=Lattes`,
-avec le message de confirmation affiché au-dessus du tableau.
+### Le bouton « Annuler »
 
-::figure captures/fig-00-2-liste-des-produits.png
+Les deux formulaires portent un bouton « Annuler » qui applique exactement la même mécanique que
+les liens du tableau, mais depuis le code :
 
-**Figure 10.8** — Les deux onglets de la barre de navigation, avec l'onglet actif surligné.
+```ts
+protected annuler(): void {
+  this.router.navigate(['/produits']);
+}
+```
+
+Aucune modification n'est enregistrée : l'utilisateur revient simplement à la liste. Comme
+`router.navigate()` retourne une promesse, on peut enchaîner une redirection conditionnelle —
+par exemple n'afficher la liste que si l'utilisateur a bien modifié le produit.
+
+::figure captures/ANHULAAR RUN.PNG
+**Figure 10.5** — Le bouton « Annuler » du formulaire : un clic appelle
+`router.navigate(['/produits'])` et ramène l'utilisateur sur la page liste.
 
 ## 10.6 Cacher le champ Id Produit ou le rendre Read Only
 
@@ -852,14 +826,13 @@ Le contrôle `id` est de toute façon retiré avant l'envoi par la déconstructi
 l'interface empêche l'erreur de saisie, la déconstruction garantit que la valeur ne part pas.
 
 ::figure captures/fig-10-9-id-masque.png
-
-**Figure 10.9** — Case à cocher « Afficher le champ Id Produit » décochée : le champ est absent
-du formulaire.
+**Figure 10.6** — Solution A : la case « Afficher le champ Id Produit » est décochée, le champ
+n'est pas rendu dans le formulaire.
 
 ::figure captures/fig-10-10-id-readonly.png
-
-**Figure 10.10** — Case cochée : le champ « Id Produit » apparaît, grisé, avec le message
-« Champ en lecture seule : l'identifiant ne peut pas être modifié. »
+**Figure 10.7** — Solution B : la case est cochée, le champ « Id Produit » apparaît grisé avec
+l'attribut `readonly` et le message « Champ en lecture seule : l'identifiant ne peut pas être
+modifié. »
 
 ## 10.7 Récapitulatif de la section 10
 
@@ -891,9 +864,6 @@ du formulaire.
 | 12 | URL `/produits/modifier/999` | Message « Produit introuvable » | Conforme |
 | 13 | URL `/produits/modifier/abc` | Message « Produit introuvable » | Conforme |
 | 14 | Retour arrière du navigateur | Navigation vers la liste, données à jour | Conforme |
-
-::figure
-**Figure T.1** — Résumé des tests dans le tableau ci-dessus, après exécution.
 
 ## Conclusion
 

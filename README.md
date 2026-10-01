@@ -37,12 +37,11 @@ src/app/
 
 docs/
 ├── RAPPORT_DEVOIR_02.md                 Rapport (source unique)
-├── Devoir_02_Nadhem_BEL_HADJ.docx       Livrable Word avec les captures
+├── Devoir_02_Nadhem_BEL_HADJ.docx       Livrable Word avec les 11 captures
 └── captures/                            Captures d'écran de l'application
 
 tools/
 ├── captures.mjs                         Parcours CRUD automatisés + captures
-├── associer-captures.mjs                Associe les captures aux figures du rapport
 ├── build-docx.mjs                       Génère le .docx à partir du rapport .md
 └── verifier-docx.cjs                    Contrôle du .docx produit
 ```
@@ -82,9 +81,9 @@ tools/
 npm run rapport
 ```
 
-Le script lit `docs/RAPPORT_DEVOIR_02.md` et produit `docs/Devoir_02_Nadhem_BEL_HADJ.docx`.
-Les blocs `::figure <chemin>` embarquent une capture ; les blocs `::figure` sans chemin laissent
-un encadré à compléter manuellement.
+Le script lit `docs/RAPPORT_DEVOIR_02.md` et produit `docs/Devoir_02_Nadhem_BEL_HADJ.docx`, puis
+contrôle le résultat. Chaque bloc `::figure <chemin>` du rapport correspond à une capture de
+`docs/captures/` : les onze figures du document sont des images réelles, sans encadré vide.
 
 ## Régénérer les captures
 
