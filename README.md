@@ -36,14 +36,17 @@ src/app/
 └── app.ts / app.css
 
 docs/
-├── RAPPORT_DEVOIR_02.md                 Rapport (source unique)
-├── Devoir_02_Nadhem_BEL_HADJ.docx       Livrable Word avec les 11 captures
-└── captures/                            Captures d'écran de l'application
+├── RAPPORT_DEVOIR_02.md                          Rapport (source unique)
+├── Devoir_02_Nadhem_BEL_HADJ.docx                Livrable 1 — rapport complet
+├── Devoir_02_Captures_ecran_Nadhem_BEL_HADJ.docx  Livrable 1 bis — les 11 captures seules
+└── captures/                                     Captures d'écran de l'application
 
 tools/
-├── captures.mjs                         Parcours CRUD automatisés + captures
-├── build-docx.mjs                       Génère le .docx à partir du rapport .md
-└── verifier-docx.cjs                    Contrôle du .docx produit
+├── captures.mjs                                  Parcours CRUD automatisés + captures
+├── build-docx.mjs                                Génère le rapport Word complet
+├── build-captures-docx.mjs                       Génère le Word « captures seules »
+├── verifier-docx.cjs                             Contrôle du rapport Word
+└── verifier-captures-docx.cjs                    Contrôle du Word « captures seules »
 ```
 
 ## Correspondance avec les sections du devoir
@@ -84,6 +87,16 @@ npm run rapport
 Le script lit `docs/RAPPORT_DEVOIR_02.md` et produit `docs/Devoir_02_Nadhem_BEL_HADJ.docx`, puis
 contrôle le résultat. Chaque bloc `::figure <chemin>` du rapport correspond à une capture de
 `docs/captures/` : les onze figures du document sont des images réelles, sans encadré vide.
+
+## Régénérer le Word « captures seules »
+
+```bash
+npm run captures:docx
+```
+
+Produit `docs/Devoir_02_Captures_ecran_Nadhem_BEL_HADJ.docx` : une page de garde suivie des
+uniquement onze captures, chacune avec sa légende. Aucune.commentaire de rapport. Les figures
+sont extraites du même `.md`, donc les légendes ne peuvent pas diverger du rapport.
 
 ## Régénérer les captures
 

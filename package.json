@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "captures": "node tools/captures.mjs",
-    "rapport": "node tools/build-docx.mjs && node tools/verifier-docx.cjs"
+    "rapport": "node tools/build-docx.mjs && node tools/verifier-docx.cjs",
+    "captures:docx": "node tools/build-captures-docx.mjs && node tools/verifier-captures-docx.cjs"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
