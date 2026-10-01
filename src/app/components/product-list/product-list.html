@@ -1,0 +1,64 @@
+<!-- SECTION 9 — Affichage de la liste avec l'instruction @for
+     SECTION 10 — Liens « Modifier » (routerLink) et « Supprimer » (click) -->
+
+@if (nomModifie()) {
+  <div class="alerte-confirmation">
+    Produit « {{ nomModifie() }} » modifié avec succès.
+    <a href="#" (click)="fermerMessage(); $event.preventDefault()">Fermer</a>
+  </div>
+}
+
+<header class="entete">
+  <h2>Liste des produits</h2>
+  <div class="entete-actions">
+    <span class="badge">{{ nombreProduits() }} produit(s)</span>
+    <span class="badge badge-total">Stock : {{ prixEnDinars.format(valeurDuStock()) }}</span>
+    <a class="btn btn-primaire" routerLink="/produits/ajouter">+ Ajouter un produit</a>
+  </div>
+</header>
+
+<table class="table-produits">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nom</th>
+      <th>Description</th>
+      <th>Prix</th>
+      <th>Quantité</th>
+      <th>Catégorie</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!--
+      @for : instruction de contrôle de flux (Angular 17+), remplace *ngFor.
+      track produit.id : identifiant de suivi. Il dit à Angular quel élément
+      de la liste est mis à jour, plutôt que de tout reconstruire.
+      @empty : bloc affiché quand la collection est vide.
+    -->
+    @for (produit of produits(); track produit.id) {
+      <tr>
+        <td>{{ produit.id }}</td>
+        <td class="cellule-nom">{{ produit.nom }}</td>
+        <td>{{ produit.description }}</td>
+        <td>{{ prixEnDinars.format(produit.prix) }}</td>
+        <td>{{ produit.quantite }}</td>
+        <td><span class="tag">{{ produit.categorie }}</span></td>
+        <td class="cellule-actions">
+          <!-- Navigation vers la page de modification, l'id passe dans l'URL -->
+          <a class="lien-action" [routerLink]="['/produits/modifier', produit.id]">Modifier</a>
+
+          <!-- Lien de suppression : <a href="#" (click)="..."> -->
+          <a class="lien-action lien-supprimer" href="#" (click)="supprimer(produit.id, produit.nom); $event.preventDefault()">
+            Supprimer
+          </a>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="7" class="cellule-vide">Aucun produit enregistré pour le moment.</td>
+      </tr>
+    }
+  </tbody>
+</table>

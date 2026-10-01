@@ -1,0 +1,30 @@
+<!-- Coquille de l'application : barre de navigation + zone routée (RouterOutlet) -->
+<div class="app-shell">
+  <nav class="barre-navigation">
+    <div class="marque">
+      <span class="logo">▲</span>
+      <span>Gestion des Produits</span>
+    </div>
+
+    <div class="liens-nav">
+      <a routerLink="/produits" routerLinkActive="actif" [routerLinkActiveOptions]="{ exact: true }">
+        Liste ({{ nombreProduits() }})
+      </a>
+      <a routerLink="/produits/ajouter" routerLinkActive="actif">Ajouter</a>
+    </div>
+
+    <button type="button" class="btn btn-secondaire" (click)="reinitialiser()">
+      Réinitialiser les données
+    </button>
+  </nav>
+
+  <main class="contenu">
+    <!-- SECTION 10 — « Naviguer entre les pages avec Router » :
+         RouterOutlet affiche le composant correspondant à l'URL courante. -->
+    <router-outlet />
+  </main>
+
+  <footer class="pied">
+    Devoir 02 — Sections 9 &amp; 10 · Angular CRUD · Nadhem BEL HADJ
+  </footer>
+</div>

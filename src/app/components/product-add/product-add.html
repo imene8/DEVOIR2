@@ -1,0 +1,94 @@
+<!-- SECTION 9 — Formulaire d'ajout d'un produit -->
+
+<div class="formulaire-page">
+  <header class="entete">
+    <h2>Ajouter un nouveau produit</h2>
+    <a class="btn btn-secondaire" routerLink="/produits">← Retour à la liste</a>
+  </header>
+
+  @if (erreurGlobale()) {
+    <div class="alerte alerte-erreur">{{ message() }}</div>
+  }
+
+  <!--
+    [formGroup] lie le <form> au FormGroup déclaré dans la classe TypeScript.
+    formControlName correspond au nom de chaque contrôle du groupe.
+  -->
+  <form [formGroup]="produitForm" (ngSubmit)="ajouterProduit()" class="form-produit">
+    <div class="grille">
+      <div class="champ">
+        <label for="nom">Nom du produit <span class="obligatoire">*</span></label>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          placeholder="Ex. : Huile d'olive"
+          [class.invalide]="estInvalide('nom')"
+        />
+        @if (estInvalide('nom')) {
+          <small class="erreur">{{ afficherErreur('nom') }}</small>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="categorie">Catégorie <span class="obligatoire">*</span></label>
+        <select id="categorie" formControlName="categorie">
+          @for (categorie of categories; track categorie) {
+            <option [value]="categorie">{{ categorie }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="champ">
+      <label for="description">Description <span class="obligatoire">*</span></label>
+      <textarea
+        id="description"
+        rows="3"
+        formControlName="description"
+        placeholder="Décrivez le produit en une ou deux phrases."
+        [class.invalide]="estInvalide('description')"
+      ></textarea>
+      @if (estInvalide('description')) {
+        <small class="erreur">{{ afficherErreur('description') }}</small>
+      }
+    </div>
+
+    <div class="grille">
+      <div class="champ">
+        <label for="prix">Prix (DT) <span class="obligatoire">*</span></label>
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          id="prix"
+          formControlName="prix"
+          [class.invalide]="estInvalide('prix')"
+        />
+        @if (estInvalide('prix')) {
+          <small class="erreur">{{ afficherErreur('prix') }}</small>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="quantite">Quantité en stock <span class="obligatoire">*</span></label>
+        <input
+          type="number"
+          step="1"
+          min="0"
+          id="quantite"
+          formControlName="quantite"
+          [class.invalide]="estInvalide('quantite')"
+        />
+        @if (estInvalide('quantite')) {
+          <small class="erreur">{{ afficherErreur('quantite') }}</small>
+        }
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primaire">Enregistrer le produit</button>
+      <button type="button" class="btn btn-secondaire" (click)="annuler()">Annuler</button>
+    </div>
+  </form>
+</div>

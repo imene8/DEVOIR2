@@ -1,0 +1,99 @@
+<!-- SECTION 10 — Formulaire de modification d'un produit
+     SECTION 10 — Champ Id produit : masqué ou read only -->
+
+@if (produitIntrouvable()) {
+  <div class="introuvable">
+    <h2>Produit introuvable</h2>
+    <p>Aucun produit ne porte l'identifiant <strong>{{ idProduit() ?? '—' }}</strong>.</p>
+    <a class="btn btn-primaire" routerLink="/produits">Retour à la liste</a>
+  </div>
+} @else {
+  <div class="formulaire-page">
+    <header class="entete">
+      <h2>Modifier le produit #{{ idProduit() }}</h2>
+      <a class="btn btn-secondaire" routerLink="/produits">← Retour à la liste</a>
+    </header>
+
+    @if (message()) {
+      <div class="alerte-erreur">{{ message() }}</div>
+    }
+
+    <form [formGroup]="produitForm" (ngSubmit)="modifierProduit()" class="form-produit">
+      <div class="bloc-id">
+        <label class="case-a-cocher">
+          <input type="checkbox" [checked]="afficherId()" (change)="basculerAffichageId()" />
+          <span>Afficher le champ « Id Produit »</span>
+        </label>
+
+        <!-- Option A : le champ est masqué (@if) — Option B : il est visible mais en lecture seule -->
+        @if (afficherId()) {
+          <div class="champ champ-id">
+            <label for="id">Id Produit</label>
+            <!--
+              [readonly] : le champ reste sélectionnable et copiable mais non modifiable.
+              L'id fait partie de l'URL et de la clé primaire : il ne doit jamais changer.
+              formControlName exige un parent [formGroup] : le bloc doit rester dans le <form>.
+            -->
+            <input type="number" id="id" formControlName="id" readonly class="champ-lecture-seule" />
+            <small class="aide">Champ en lecture seule : l'identifiant ne peut pas être modifié.</small>
+          </div>
+        }
+      </div>
+
+      <div class="grille">
+        <div class="champ">
+          <label for="nom">Nom du produit <span class="obligatoire">*</span></label>
+          <input type="text" id="nom" formControlName="nom" [class.invalide]="estInvalide('nom')" />
+          @if (estInvalide('nom')) {
+            <small class="erreur">{{ afficherErreur('nom') }}</small>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="categorie">Catégorie <span class="obligatoire">*</span></label>
+          <select id="categorie" formControlName="categorie">
+            @for (categorie of categories; track categorie) {
+              <option [value]="categorie">{{ categorie }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="champ">
+        <label for="description">Description <span class="obligatoire">*</span></label>
+        <textarea
+          id="description"
+          rows="3"
+          formControlName="description"
+          [class.invalide]="estInvalide('description')"
+        ></textarea>
+        @if (estInvalide('description')) {
+          <small class="erreur">{{ afficherErreur('description') }}</small>
+        }
+      </div>
+
+      <div class="grille">
+        <div class="champ">
+          <label for="prix">Prix (DT) <span class="obligatoire">*</span></label>
+          <input type="number" step="0.01" min="0" id="prix" formControlName="prix" [class.invalide]="estInvalide('prix')" />
+          @if (estInvalide('prix')) {
+            <small class="erreur">{{ afficherErreur('prix') }}</small>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="quantite">Quantité en stock <span class="obligatoire">*</span></label>
+          <input type="number" step="1" min="0" id="quantite" formControlName="quantite" [class.invalide]="estInvalide('quantite')" />
+          @if (estInvalide('quantite')) {
+            <small class="erreur">{{ afficherErreur('quantite') }}</small>
+          }
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primaire">Enregistrer les modifications</button>
+        <button type="button" class="btn btn-secondaire" (click)="annuler()">Annuler</button>
+      </div>
+    </form>
+  </div>
+}

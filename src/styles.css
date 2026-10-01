@@ -1,0 +1,59 @@
+:root {
+  --couleur-accent: #1976d2;
+  --couleur-accent-fonce: #0d47a1;
+  --couleur-titre: #16202e;
+  --rouge: #d32f2f;
+  --gris-clair: #f1f4f8;
+  --gris-bordure: #dfe4ec;
+  --gris-texte: #6b7684;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #eef1f6;
+  color: #26313f;
+  line-height: 1.5;
+}
+
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-primaire {
+  background: var(--couleur-accent);
+  border-color: var(--couleur-accent);
+  color: #fff;
+}
+
+.btn-primaire:hover {
+  background: var(--couleur-accent-fonce);
+}
+
+.btn-secondaire {
+  background: #fff;
+  border-color: #c6cedb;
+  color: #33404f;
+}
+
+.btn-secondaire:hover {
+  background: #f2f5f9;
+}

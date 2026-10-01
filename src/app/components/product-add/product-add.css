@@ -1,0 +1,109 @@
+.formulaire-page {
+  background: #fff;
+  border: 1px solid var(--gris-bordure);
+  border-radius: 12px;
+  padding: 1.75rem;
+  max-width: 860px;
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.entete h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--couleur-titre);
+}
+
+.form-produit {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.grille {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .grille {
+    grid-template-columns: 1fr;
+  }
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2c3a4b;
+}
+
+.obligatoire {
+  color: var(--rouge);
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #c6cedb;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--couleur-accent);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+input.invalide,
+select.invalide,
+textarea.invalide {
+  border-color: var(--rouge);
+  background: #fff6f6;
+}
+
+.erreur {
+  color: var(--rouge);
+  font-size: 0.8rem;
+}
+
+.alerte {
+  margin-bottom: 1.25rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  background: #e9f7ef;
+  border: 1px solid #b6e0c6;
+  color: #1b5e35;
+  font-size: 0.9rem;
+}
+
+.alerte-erreur {
+  background: #fdecec;
+  border-color: #f2b8b8;
+  color: #a01818;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}

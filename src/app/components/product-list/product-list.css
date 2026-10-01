@@ -1,0 +1,132 @@
+.alerte-confirmation {
+  margin-bottom: 1.25rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  background: #e9f7ef;
+  border: 1px solid #b6e0c6;
+  color: #1b5e35;
+  font-size: 0.9rem;
+}
+
+.alerte-confirmation a {
+  margin-left: 0.75rem;
+  color: #1b5e35;
+  font-weight: 600;
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.entete h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--couleur-titre);
+}
+
+.entete-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--gris-clair);
+  border: 1px solid var(--gris-bordure);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.badge-total {
+  background: #e8f0fe;
+  border-color: #b6cdf7;
+  color: #14418f;
+}
+
+.table-produits {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--gris-bordure);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-produits th,
+.table-produits td {
+  padding: 0.7rem 0.85rem;
+  text-align: left;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--gris-bordure);
+}
+
+.table-produits thead th {
+  background: #f6f8fb;
+  font-weight: 600;
+  color: #2c3a4b;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+}
+
+.table-produits tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-produits tbody tr:hover {
+  background: #fafcff;
+}
+
+.cellule-nom {
+  font-weight: 600;
+}
+
+.tag {
+  background: #eef7ee;
+  border: 1px solid #c8e3c8;
+  color: #2f6b2f;
+  border-radius: 6px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.cellule-actions {
+  display: flex;
+  gap: 0.85rem;
+  white-space: nowrap;
+}
+
+.lien-action {
+  color: var(--couleur-accent);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+
+.lien-action:hover {
+  color: var(--couleur-accent-fonce);
+}
+
+.lien-supprimer {
+  color: var(--rouge);
+}
+
+.lien-supprimer:hover {
+  color: #a01818;
+}
+
+.cellule-vide {
+  text-align: center;
+  padding: 2rem;
+  color: var(--gris-texte);
+  font-style: italic;
+}
